@@ -14,8 +14,7 @@ pipeline{
     stages{
         stage('Checkout Code') {
             steps {
-                git branch: 'master',
-                url : 'git@github.com:naveenshekar3/bdd-framework.git'
+                checkout scm
             }
         }
 
