@@ -28,10 +28,18 @@ public class LoginPage {
     private By mobilePassword = By.id("com.demo.app:id/password");
     private By mobileLoginBtn = By.id("com.demo.app:id/login");
 
-    public void open(){
+    public void login(){
         if (CommonUtils.isWebExecution()){
             driver.get(ConfigReader.get("url"));
             System.out.println("TITLE IS -----> "+driver.getTitle());
+        }
+    }
+
+    public void loginAndCheckTitle(String expectedTitle){
+        if (CommonUtils.isWebExecution()){
+            driver.get(ConfigReader.get("url"));
+            String actualTitle = driver.getTitle();
+            Assert.assertEquals(actualTitle,expectedTitle, "Actual title is not matching with expected title, Actual title -> "+ actualTitle+" expected title -> "+ expectedTitle);
         }
     }
 }
