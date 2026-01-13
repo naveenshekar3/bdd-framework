@@ -5,9 +5,8 @@ Feature: Login
 #    When user enters valid credentials
 #    Then user should login successfully
 
-  Scenario: Invalid login
+  Scenario Outline: Invalid login
     Given user is on login page and checks the title "<title>"
-
-    Example:
+    Examples:
       | title |
       | asDFG |
