@@ -9,7 +9,7 @@ import org.testng.annotations.Listeners;
 @CucumberOptions(
         features = "src/test/java/features",
         glue = {"stepdefinitions", "hooks"},
-        plugin = {"pretty", "io.qameta.allure.cucumber7jvm.AllureCucumber7Jvm"}
+        plugin = {"pretty", "io.qameta.allure.cucumber7jvm.AllureCucumber7Jvm", "rerun:target/rerun.txt"}
 )
 public class TestRunner extends AbstractTestNGCucumberTests {
 
