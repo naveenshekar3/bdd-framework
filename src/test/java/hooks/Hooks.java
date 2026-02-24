@@ -17,12 +17,13 @@ import org.openqa.selenium.WebDriver;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.nio.file.Files;
 
 public class Hooks {
 
     @Before
-    public void setup() throws Exception {
+    public void setup() throws MalformedURLException {
         if (ConfigReader.get("execution").equalsIgnoreCase("web")) {
             WebDriver driver = WebDriverManager.createWebDriver(ConfigReader.get("browser"));
             DriverFactory.setDriver(driver);

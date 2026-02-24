@@ -17,7 +17,10 @@ public class WebDriverManager {
                 options.addArguments("--window-size=1920,1080");
                 options.addArguments("--disable-gpu");
             }
-            return new ChromeDriver(options);
+            WebDriver driver = new ChromeDriver(options);
+            if (!isHeadless)
+                driver.manage().window().maximize();
+            return driver;
         } throw new RuntimeException("Browser not supported");
     }
 }
