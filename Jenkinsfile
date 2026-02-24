@@ -33,8 +33,8 @@ pipeline{
             steps{
                 sh """
                 mvn test \
-                -DretryCount=${parameters.RETRY}\
-                -Dcucumber.filter.tags='${parameters.TAGS}'
+                -DretryCount=${params.RETRY}\
+                -Dcucumber.filter.tags='${params.TAGS}'
                 """
             }
         }
