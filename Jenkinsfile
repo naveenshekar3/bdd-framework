@@ -2,8 +2,13 @@ pipeline{
     agent any
 
     tools{
-        maven 'Maven-3.6.3'
+        maven 'Maven-3'
         jdk  'JDK-17'
+    }
+
+    parameters{
+        string(name: 'RETRY', defaultValue: '1', description: 'Retry Count')
+        string(name: 'TAGS', defaultValue: '@smoke', description: 'Cucumber Tags')
     }
 
     environment{
@@ -26,24 +31,19 @@ pipeline{
 
         stage('Run Automation Tests'){
             steps{
-                sh 'mvn test'
-            }
-        }
-
-        stage('Generate Allure Report'){
-            steps{
-                allure(
-                    includeProperties: false,
-                    jdk: '',
-                    results: [[path:"${ALLURE_RESULTS}"]]
-                )
+                sh """
+                mvn test \
+                -DretryCount=${parameters.RETRY}\
+                -Dcucumber.filter.tags='${parameters.TAGS}'
+                """
             }
         }
     }
     post{
-        always{
-            echo 'Pipeline execution completed'
-            archiveArtificats artifacts: '**/target/screenshots/*.png', allowEmptyArchive: true
+        always {
+                    allure includeProperties: false,
+                        jdk: '',
+                        results: [[path: 'target/allure-results']]
         }
 
         success{
